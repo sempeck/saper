@@ -1,25 +1,38 @@
 
+TABLICA
+  rozmiar tablicy
+  rysowanie planszy x na x
+  (jak indeksować tablicę?)
+    js tworzy tablicę i nadaje id każdej komórce
+    dodaje funkcję "click"
+  zasłanianie planszy i odsłanianie
 
-pytanie: rozmiar tablicy
-rysowanie planszy x na x
+LOSOWANIE BOMB
+	losowanie i rozmieszczanie bomb
+	  dodawanie danych do każdego kwadratu
 
-pierwsze kliknięcie (nie ma bomby)
+	---
+	każdy kwadrat musi mieć informacje:
+	  czy jest w nim bomba
+	  ile bomb jest wokoło (dodaje wszystkie i pokazuje liczbę)
+	  czy został oznaczony flagą
+	  czy jest granicznym?
+	--- 
 
-losowanie i rozmieszczanie bomb
-oznaczanie bomb dookoła cyframi
-zasłanianie planszy
+KLIKANIE
+	pierwsze kliknięcie (nie ma bomby)
+	flagowanie bomb
+	  licznik oznaczanych bomb
+	klikanie i odsłanianie cyfr i pustych pól
+	  puste pola sprawdzają, czy są puste pola w okolicy
 
-oznaczanie bomb
-licznik oznaczanych bomb
-klikanie i odsłanianie cyfr i pustych pól
-puste pola sprawdzają, czy są puste pola w okolicy
-
-wybuch i pokazanie wszystkich bomb
+WYNIK
+	wybuch i pokazanie wszystkich bomb
+	wygrana
 
 
-
-grafika:
-zasłonięta plansza
-odsłonięta plansza
-bomba
-flaga
+GRAFIKA
+	zasłonięta plansza
+	odsłonięta plansza
+	bomba
+	flaga
