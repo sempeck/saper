@@ -1,0 +1,25 @@
+
+
+pytanie: rozmiar tablicy
+rysowanie planszy x na x
+
+pierwsze kliknięcie (nie ma bomby)
+
+losowanie i rozmieszczanie bomb
+oznaczanie bomb dookoła cyframi
+zasłanianie planszy
+
+oznaczanie bomb
+licznik oznaczanych bomb
+klikanie i odsłanianie cyfr i pustych pól
+puste pola sprawdzają, czy są puste pola w okolicy
+
+wybuch i pokazanie wszystkich bomb
+
+
+
+grafika:
+zasłonięta plansza
+odsłonięta plansza
+bomba
+flaga

@@ -1,0 +1,33 @@
+body {
+  background-color: #C97A5B;
+  color: #F8C278;
+  /*paleta 48345C
+           C97A5B
+           915161
+           F1A468
+           F8C278*/
+}
+
+#test {
+	 /*background-color: #fff;*/
+}
+
+.wrapper {
+  padding: 10%;
+ 
+ }
+
+table {
+ border: 5px solid #48345C;
+ /*background-color: #fff;*/
+}
+
+td {
+ width: 70px;
+ height: 70px;
+ border: 1px solid #48345C;
+ text-align: center;
+ font-size: 30px;
+ background-color: #915161;
+ padding: 5px;
+}
