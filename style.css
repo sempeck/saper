@@ -1,6 +1,7 @@
 body {
   background-color: #C97A5B;
   color: #F8C278;
+  font-size: 10px;
   /*paleta 48345C
            C97A5B
            915161
@@ -8,13 +9,10 @@ body {
            F8C278*/
 }
 
-#test {
-	 /*background-color: #fff;*/
-}
-
 .wrapper {
-  padding: 10%;
- 
+	margin: 40px;
+  /*padding: 100px;*/
+ /*background-color: #fff;*/
  }
 
 table {
@@ -23,11 +21,11 @@ table {
 }
 
 td {
- width: 70px;
- height: 70px;
+ width: 30px;
+ height: 30px;
  border: 1px solid #48345C;
  text-align: center;
- font-size: 30px;
+ font-size: 10px;
  background-color: #915161;
  padding: 5px;
 }
