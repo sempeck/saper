@@ -2,25 +2,16 @@
 TABLICA
 +  rozmiar tablicy
 +  rysowanie planszy x na y
+
+CEL:
+dodanie do komórki w tabeli html onclick=, który po kliknięciu wywoła funkcję i poda jej swoje id
+funkcja weźmie id i odpowiednio obrobi
+
    
    dodaje funkcję "click(x,y)" z parametrami x,y
    funkcja "flaga(x,y)"
 
     ---
-    CLASS KWADRAT
-    
-    //matryca dla nowych kwadratów
-    function Kwadrat(numer,pozycja,bomba,flaga) {
-      this.numer = numer;
-      this.pozycja = pozycja;
-      this.bomba = bomba;
-      this.flaga = flaga;
-    }
-
-    //tworzenie nowego
-    var kwadrat[nr] = new Kwadrat(nr,[x,y],false,false);
-
-
 	każdy kwadrat musi mieć informacje:
       numer lub	pozycja xy
 	  czy jest w nim bomba

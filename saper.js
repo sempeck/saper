@@ -15,27 +15,15 @@ function nowyKwadrat(nr,x,y) {
 } 
 
 function bomby () {
-    kwadrat[6].bomba = true; //testowo
+    kwadrat[6].bomba = true;
+    document.getElementById(6).innerHTML = "Bum!";
 }
 
-function clickEvents () {
- var table = document.getElementById("table");
-    if (table != null) {
-        for (var i = 0; i < table.rows.length; i++) {
-            for (var j = 0; j < table.rows[i].cells.length; j++)
-            table.rows[i].cells[j].onclick = function () {
-                klik(this);
-            };
-        }
-    }
-  }
-
-function klik(tableCell) {
-      // alert(tableCell.innerHTML);
-      tableCell.style.backgroundColor = "#C97A5B";
+function klik(id) {
+      document.getElementById(id).style.backgroundColor = "#C97A5B";
+      document.getElementById("test").innerHTML = "Numer: "+id;
 
     }
-
 
 function plansza() {
   var body    = document.getElementsByTagName("body")[0];
@@ -50,13 +38,14 @@ function plansza() {
             nr++;
             nowyKwadrat(nr,x,y);
             cell.id = nr;
-            // cell.onclick = function () {click(nr);}             	
-              // this.style.backgroundColor = "#C97A5B";
-           
 
-		      var cellText = document.createTextNode(kwadrat[nr].numer);
-		      
-		      cell.appendChild(cellText);
+            cell.onclick = function() {
+            	klik(this.id);
+            };
+           
+		      // var cellText = document.createTextNode(kwadrat[nr].numer);
+		      // cell.appendChild(cellText);
+
 		      row.appendChild(cell);
       }
     tblBody.appendChild(row);
@@ -65,16 +54,15 @@ function plansza() {
  body.appendChild(tbl);
 
 
-clickEvents();
+dodanie_klikania();
 bomby();   
-
 
 }
 
 
 function test () {
-  // document.write("test: ", kwadrat[3].pozycja);
-  document.getElementById("5").innerHTML = "Bum!";
+	var t = 6;
+  // document.getElementById(t).innerHTML = "Bum!";
   document.getElementById("test").innerHTML = "Numer: "+kwadrat[t].numer + ". Pozycja x,y: " + kwadrat[t].pozycja+". Bomba: "+kwadrat[t].bomba;
 
 }
