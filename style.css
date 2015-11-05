@@ -11,13 +11,11 @@ body {
 
 .wrapper {
 	margin: 40px;
-  /*padding: 100px;*/
- /*background-color: #fff;*/
  }
 
 table {
  border: 5px solid #48345C;
- /*background-color: #fff;*/
+ margin: 40px;
 }
 
 td {
@@ -28,5 +26,4 @@ td {
  font-size: 10px;
  background-color: #915161;
  padding: 5px;
- /*box-shadow: 10px 10px 10px 1px;*/
 }

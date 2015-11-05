@@ -1,39 +1,63 @@
-function myFunction() {
-	document.getElementById('1').style.backgroundColor = "#C97A5B";
-}
+//rozmiar planszy
+var r = 8;
+var rowIndex = 0;
+var cellIndex = 0;
+var nr = -1;
+var kwadrat = [];
 
+    //matryca dla nowych kwadratów
+function Kwadrat(numer,pozycja,bomba,flaga) {
+      this.numer = numer;
+      this.pozycja = pozycja;
+      this.bomba = bomba;
+      this.flaga = flaga;
+    }
 
 function plansza() {
-  // get the reference for the body
-  var body = document.getElementsByTagName("body")[0];
- 
-  // creates a <table> element and a <tbody> element
+
+  var body    = document.getElementsByTagName("body")[0];
   var tbl     = document.createElement("table");
   var tblBody = document.createElement("tbody");
+
  
-  // creating all cells
-  for (var i = 0; i < 8; i++) {
-    // creates a table row
+  for (var x = 0; x < r; x++) {
     var row = document.createElement("tr");
- 
-    for (var j = 0; j < 8; j++) {
-      // Create a <td> element and a text node, make the text
-      // node the contents of the <td>, and put the <td> at
-      // the end of the table row
-      var cell = document.createElement("td");
-      var cellText = document.createTextNode("rz "+i+", kol "+j);
-      cell.appendChild(cellText);
-      row.appendChild(cell);
-    }
- 
-    // add the row to the end of the table body
+      for (var y = 0; y < r; y++) {
+		      var cell = document.createElement("td");
+		        rowIndex = x;
+            cellIndex = y;
+            nr++;
+            kwadrat[nr] = new Kwadrat(nr,[x,y],false,false);
+
+            cell.onclick = function () {
+            	// click(); 
+            	
+              this.style.backgroundColor = "#C97A5B";
+
+            }
+
+		      var cellText = document.createTextNode(kwadrat[nr].numer);
+		      
+		      cell.appendChild(cellText);
+		      row.appendChild(cell);
+      }
     tblBody.appendChild(row);
   }
- 
-  // put the <tbody> in the <table>
-  tbl.appendChild(tblBody);
-  // appends <table> into <body>
-  body.appendChild(tbl);
-  // sets the border attribute of tbl to 2;
-  // tbl.setAttribute("border", "2");
+ tbl.appendChild(tblBody);
+ body.appendChild(tbl);
+
 }
+
+function click () {
+  document.write("test");
+  // tbl[i,j].style.backgroundColor = "#C97A5B";
+  // var ind = document.getElementsByTagName("tbody").rows[1].cells[1];
+  // document.write(ind);
+}
+
+function test () {
+  // document.write("test: ", kwadrat[3].pozycja);
+  document.getElementById("test").innerHTML = kwadrat[0].numer;
+
+}
+
