@@ -23,28 +23,30 @@ function bomby () {
 	  	var found = false;
 	    	for (var i=0;i<ileBomb;i++) {
 	    		if(losowane[i]==los) {
-	    			found=true;break
+	    			found=true;
+	    			break
 	    		}
 	    	}
 	    	if(!found) {
 	    		losowane[losowane.length]=los;
-		    kwadrat[los].bomba = true;
+		      kwadrat[los].bomba = true;
             }
   	  }
-	}
+	  }
 
 function klik(id) {
       document.getElementById(id).style.backgroundColor = "#C97A5B";
       if (kwadrat[id].bomba === true) {
         document.getElementById(id).innerHTML = "Bum!";
-        document.getElementById(id).style.backgroundColor = "#48345C";
      //pokazuje wszystkie bomby po wybuchu
         for (i=0;i<pola;i++) {
           if (kwadrat[i].bomba === true) {
         document.getElementById(i).innerHTML = "Bum!";
-      }
+        document.getElementById(i).style.backgroundColor = "#C97A5B";
+          }
+        //zmienia tło klikniętej bomby
+        document.getElementById(id).style.backgroundColor = "#48345C";
         }
-
       }
 
       document.getElementById("test").innerHTML = "Numer: "+id+" Pozycja: "+kwadrat[id].pozycja+". Bomba: "+kwadrat[id].bomba;
@@ -67,26 +69,16 @@ function plansza() {
             cell.onclick = function() {
             	klik(this.id);
             };
-           
-		      // var cellText = document.createTextNode(kwadrat[nr].numer);
-		      // cell.appendChild(cellText);
 
 		      row.appendChild(cell);
       }
-    tblBody.appendChild(row);
+       tblBody.appendChild(row);
+    }
+     tbl.appendChild(tblBody);
+   body.appendChild(tbl);
+
+  bomby();   
+
   }
- tbl.appendChild(tblBody);
- body.appendChild(tbl);
 
-bomby();   
-
-}
-
-
-// function test () {
-	// var t = 6;
- //  // document.getElementById(t).innerHTML = "Bum!";
- //  document.getElementById("test").innerHTML = "Numer: "+kwadrat[t].numer + ". Pozycja x,y: " + kwadrat[t].pozycja+". Bomba: "+kwadrat[t].bomba;
-
-// }
 
