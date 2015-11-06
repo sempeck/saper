@@ -1,44 +1,11 @@
 To do:
-LICZNIK
-  sprawdzać każdą bombę czy każdy kwadrat?
 
+SĄSIEDZI
+LICZNIK
 ODKRYWANIE
 FLAGOWANIE
-META
-
-
-TABLICA
-+  rozmiar tablicy
-+  rysowanie planszy x na y
-+  dodaje funkcję "click(x,y)" z parametrami x,y
-   funkcja "flaga(x,y)"
-
-    ---
-	każdy kwadrat musi mieć informacje:
-      numer lub	pozycja xy
-	  czy jest w nim bomba
--	  ile bomb jest wokoło (dodaje wszystkie i pokazuje liczbę)
-	  czy został oznaczony flagą
-	  czy jest granicznym?
-	---
-
-LOSOWANIE BOMB
-+	losowanie i rozmieszczanie bomb
+META + ZEGAR
 	
-KLIKANIE
+JESZCZE
 	pierwsze kliknięcie (nie ma bomby)
-	flagowanie bomb
-	  licznik oznaczanych bomb
-	klikanie i odsłanianie cyfr i pustych pól
-	  puste pola sprawdzają, czy są puste pola w okolicy
-
-WYNIK
-	wybuch i pokazanie wszystkich bomb
-	wygrana
-
-
-GRAFIKA
-	zasłonięta plansza
-	odsłonięta plansza
-	bomba
-	flaga
+    przekreślona bomba jeśli źle oflagowana

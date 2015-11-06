@@ -1,20 +1,21 @@
 var r = 8; //rozmiar planszy
-var ileBomb = 10;
+var ileBomb = 20;
 var pola = r*r; //ilość pól
 var nr = -1;
 var kwadrat = [];
 
     //matryca dla nowych kwadratów
-function Kwadrat(numer,pozycja,bomba,flaga,licznik) {
-      this.numer = numer;
-      this.pozycja = pozycja;
+function Kwadrat(pozycja,bomba,flaga,licznik,sasiedzi) {
+      this.pozycja = pozycja; // potrzebne?
       this.bomba = bomba;
       this.flaga = flaga;
       this.licznik = licznik;
+      this.sasiedzi = sasiedzi;
     }
 
 function nowyKwadrat(nr,x,y) {
-    kwadrat[nr] = new Kwadrat(nr,[x,y],false,false,0);
+    kwadrat[nr] = new Kwadrat([x,y],false,false,0,[]);
+// funkcja sasiedzi ... 
     } 
 
 function bomby () {
@@ -35,7 +36,39 @@ function bomby () {
   	  }
 	  }
 
+
+function sasiedzi () {
+	kwadrat[1].sasiedzi = [0,3];
+	kwadrat[0].sasiedzi = [0,3];
+     
+// pobierz id
+// rozłóż na x,y
+// wykonaj działania na x,y
+// odrzuć x>7 i y>7 (czyli r-1)
+// z powrotem do id
+// umieść w tablicy kwadrat.sasiedzi
+
+         
+//              y-1
+//              y    x-1, x, x+1
+//              y+1 
+      
+
+//           -(r+1) -(r) -(r-1) 
+//              -1   id     +1
+//           +(r-1)  +r  +(r+1)
+
+//    x + (y*r) = id
+//    id div r = y
+//    id - (y * r) = x
+    
+}
+
 function licznik () {
+	// pobierz kwadrat[id].sasiedzi
+	// sprawdź czy bomba = true każdego sąsiada podstawiając w miejsce id
+	// za każdy hit dodaj 1 do licznika
+
     kwadrat[5].licznik = 5;
     kwadrat[1].licznik = 3; //testowo
 }
@@ -59,7 +92,7 @@ function klik(id) {
         }
       }
 
-      document.getElementById("test").innerHTML = "Numer: "+id+" Pozycja: "+kwadrat[id].pozycja+". Bomba: "+kwadrat[id].bomba;
+      document.getElementById("test").innerHTML = "Numer: "+id+" Pozycja: "+kwadrat[id].pozycja+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik;
     }
 
 function plansza() {
@@ -88,8 +121,7 @@ function plansza() {
    body.appendChild(tbl);
 
   bomby(); 
-  licznik();//test  
+  licznik();
 
   }
-
 
