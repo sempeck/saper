@@ -35,17 +35,18 @@ function bomby () {
 	  }
 
 function klik(id) {
-      document.getElementById(id).style.backgroundColor = "#C97A5B";
+      document.getElementById(id).className = "odsloniety";
+      // document.getElementById(id).style.backgroundColor = "#C97A5B";
       if (kwadrat[id].bomba === true) {
         document.getElementById(id).innerHTML = "Bum!";
      //pokazuje wszystkie bomby po wybuchu
         for (i=0;i<pola;i++) {
           if (kwadrat[i].bomba === true) {
         document.getElementById(i).innerHTML = "Bum!";
-        document.getElementById(i).style.backgroundColor = "#C97A5B";
+        document.getElementById(i).className = "odsloniety";
           }
         //zmienia tło klikniętej bomby
-        document.getElementById(id).style.backgroundColor = "#48345C";
+        document.getElementById(id).className = "odsloniety_granat";
         }
       }
 
