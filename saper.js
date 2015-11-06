@@ -5,15 +5,16 @@ var nr = -1;
 var kwadrat = [];
 
     //matryca dla nowych kwadratów
-function Kwadrat(numer,pozycja,bomba,flaga) {
+function Kwadrat(numer,pozycja,bomba,flaga,licznik) {
       this.numer = numer;
       this.pozycja = pozycja;
       this.bomba = bomba;
       this.flaga = flaga;
+      this.licznik = licznik;
     }
 
 function nowyKwadrat(nr,x,y) {
-    kwadrat[nr] = new Kwadrat(nr,[x,y],false,false);
+    kwadrat[nr] = new Kwadrat(nr,[x,y],false,false,0);
     } 
 
 function bomby () {
@@ -34,19 +35,27 @@ function bomby () {
   	  }
 	  }
 
+function licznik () {
+    kwadrat[5].licznik = 5;
+    kwadrat[1].licznik = 3; //testowo
+}
+
 function klik(id) {
       document.getElementById(id).className = "odsloniety";
-      // document.getElementById(id).style.backgroundColor = "#C97A5B";
+
+      if (kwadrat[id].licznik !== 0) {
+      document.getElementById(id).innerHTML = kwadrat[id].licznik;
+      }
       if (kwadrat[id].bomba === true) {
-        document.getElementById(id).innerHTML = "Bum!";
+        document.getElementById(id).className += " bum";
      //pokazuje wszystkie bomby po wybuchu
         for (i=0;i<pola;i++) {
           if (kwadrat[i].bomba === true) {
-        document.getElementById(i).innerHTML = "Bum!";
-        document.getElementById(i).className = "odsloniety";
+        document.getElementById(i).className = "bum";
+        document.getElementById(i).className += " odsloniety";
           }
         //zmienia tło klikniętej bomby
-        document.getElementById(id).className = "odsloniety_granat";
+        document.getElementById(id).className += " odsloniety_granat";
         }
       }
 
@@ -78,7 +87,8 @@ function plansza() {
      tbl.appendChild(tblBody);
    body.appendChild(tbl);
 
-  bomby();   
+  bomby(); 
+  licznik();//test  
 
   }
 

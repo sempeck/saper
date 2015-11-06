@@ -1,3 +1,11 @@
+To do:
+LICZNIK
+  sprawdzać każdą bombę czy każdy kwadrat?
+
+ODKRYWANIE
+FLAGOWANIE
+META
+
 
 TABLICA
 +  rozmiar tablicy
@@ -9,13 +17,13 @@ TABLICA
 	każdy kwadrat musi mieć informacje:
       numer lub	pozycja xy
 	  czy jest w nim bomba
-	  ile bomb jest wokoło (dodaje wszystkie i pokazuje liczbę)
+-	  ile bomb jest wokoło (dodaje wszystkie i pokazuje liczbę)
 	  czy został oznaczony flagą
 	  czy jest granicznym?
 	---
 
 LOSOWANIE BOMB
-	losowanie i rozmieszczanie bomb
++	losowanie i rozmieszczanie bomb
 	
 KLIKANIE
 	pierwsze kliknięcie (nie ma bomby)

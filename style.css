@@ -28,10 +28,11 @@ td {
  height: 30px;
  border: 1px solid #48345C;
  text-align: center;
- font-size: 12px;
+ font-size: 22px;
  background-color: #915161;
  padding: 5px;
 }
+
 
 .odsloniety {
 	background-color: #C97A5B;
@@ -39,4 +40,9 @@ td {
 
 .odsloniety_granat {
 	background-color: #48345C;
+}
+
+.bum:before {
+  content: "BUM!";
+  font-size: 12px;
 }
