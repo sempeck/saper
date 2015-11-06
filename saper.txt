@@ -2,13 +2,7 @@
 TABLICA
 +  rozmiar tablicy
 +  rysowanie planszy x na y
-
-CEL:
-dodanie do komórki w tabeli html onclick=, który po kliknięciu wywoła funkcję i poda jej swoje id
-funkcja weźmie id i odpowiednio obrobi
-
-   
-   dodaje funkcję "click(x,y)" z parametrami x,y
++  dodaje funkcję "click(x,y)" z parametrami x,y
    funkcja "flaga(x,y)"
 
     ---
@@ -22,7 +16,6 @@ funkcja weźmie id i odpowiednio obrobi
 
 LOSOWANIE BOMB
 	losowanie i rozmieszczanie bomb
-	  dodawanie danych do każdego kwadratu
 	
 KLIKANIE
 	pierwsze kliknięcie (nie ma bomby)

@@ -2,11 +2,17 @@ body {
   background-color: #C97A5B;
   color: #F8C278;
   font-size: 10px;
-  /*paleta 48345C
-           C97A5B
-           915161
-           F1A468
-           F8C278*/
+  font-family: arial;
+  /*paleta 48345C granat
+           C97A5B tło - ciemny pomarańcz
+           915161 fiolet
+           F1A468 pomarańcz
+           F8C278 żółty*/
+}
+
+h1 {
+font-size: 16px;
+
 }
 
 .wrapper {
@@ -23,7 +29,7 @@ td {
  height: 30px;
  border: 1px solid #48345C;
  text-align: center;
- font-size: 10px;
+ font-size: 12px;
  background-color: #915161;
  padding: 5px;
 }
