@@ -14,13 +14,36 @@ h1 {
 font-size: 16px;
 }
 
-.wrapper {
+#saper {
+	/*background-color: #fff;*/
 	margin: 40px;
+}
+
+#plansza {
+/*   width: 200px;
+   background-color: #F8C278;
+   border: 5px solid #48345C;*/
+}
+
+.komentarz {
+	/*margin: 40px;*/
  }
 
+.zegar {
+	/*border: 5px solid #48345C;*/
+	/*border-style: inset;*/
+  margin: 0px;
+  height: 30px;
+  width: 354px;
+  /*background-color: #48345C;*/
+  /*padding-top: 10px;*/
+  font-size: 22px;
+
+}
+
 table {
- border: 5px solid #48345C;
- margin: 40px;
+ border: 3px solid #48345C;
+ margin: 0px;
 }
 
 td {
@@ -31,6 +54,7 @@ td {
  font-size: 22px;
  background-color: #915161;
  padding: 5px;
+ border-style: outset;
 }
 
 .zakryty {

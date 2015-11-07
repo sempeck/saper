@@ -1,5 +1,6 @@
 var r = 8; //rozmiar planszy
 var ileBomb = 10;
+var ileFlag = ileBomb;
 var pola = r*r; //ilość pól
 var nr = -1; // numer pola
 var kwadrat = []; // tablica z polami i ich wartościami
@@ -41,14 +42,16 @@ function flaga (id) {
 	 	     if(kwadrat[id].flaga) {
 				   	kwadrat[id].flaga = false;
 				   	document.getElementById(id).className = "zakryty";
+				   	ileFlag ++;
 				   }
 				 else {
 				   kwadrat[id].flaga = true;
 				   document.getElementById(id).className = "flaga";
+            ileFlag --;
 				     }
-
- }
-}
+    zegar.innerHTML = ileFlag;
+   }
+  }
 
 function sasiedzi () {
    var sasiad = 0;
@@ -97,12 +100,12 @@ function odkryty (id) {
       if (kwadrat[id].licznik !== 0 && kwadrat[id].bomba !== true) {
       document.getElementById(id).innerHTML = kwadrat[id].licznik;
       }
-      if (kwadrat[id].bomba === true) {
+      if (kwadrat[id].bomba) {
         document.getElementById(id).className += " bum";
      
      //pokazuje wszystkie bomby po wybuchu
-        for (i=0;i<pola;i++) {
-          if (kwadrat[i].bomba === true) {
+        for (var i=0;i<pola;i++) {
+          if (kwadrat[i].bomba && !kwadrat[i].flaga) {
         document.getElementById(i).className = "bum";
         document.getElementById(i).className += " odsloniety";
           }
@@ -119,10 +122,25 @@ function klik(id) {
       document.getElementById("test").innerHTML = "Numer: "+id+" Flaga: "+kwadrat[id].flaga+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik+". Odkryty: "+kwadrat[id].odkryty;
     }
 
+function ileFlag (ileFlag) {
+  zegar.innerHTML = ileFlag;
+}
+
+function zegar () {
+  var zegar_div = document.getElementById("zegar");
+   zegar = document.createElement("div");
+    zegar.className = "zegar";
+    zegar.innerHTML = ileFlag;
+  zegar_div.appendChild(zegar);
+}
+
+
 function plansza() {
-  var body    = document.getElementsByTagName("body")[0];
+	
+  var plansza    = document.getElementById("plansza");
   var tbl     = document.createElement("table");
   var tblBody = document.createElement("tbody");
+
   tbl.id = "table";
   
   for (var y = 0; y < r; y++) {
@@ -148,7 +166,7 @@ function plansza() {
        tblBody.appendChild(row);
     }
      tbl.appendChild(tblBody);
-   body.appendChild(tbl);
+   plansza.appendChild(tbl);
 
   bomby(); 
   licznik();

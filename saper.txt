@@ -1,7 +1,5 @@
 To do:
 ODKRYWANIE
-FLAGOWANIE
-  right-button i long click
 META + ZEGAR
 	
 JESZCZE
