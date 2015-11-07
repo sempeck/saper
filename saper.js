@@ -1,20 +1,20 @@
 var r = 8; //rozmiar planszy
-var ileBomb = 20;
+var ileBomb = 10;
 var pola = r*r; //ilość pól
 var nr = -1; // numer pola
 var kwadrat = []; // tablica z polami i ich wartościami
 
     //matryca dla nowych kwadratów
-function Kwadrat(pozycja,bomba,flaga,licznik,sasiedzi) {
-      this.pozycja = pozycja; // potrzebne?
+function Kwadrat(odkryty,bomba,flaga,licznik,sasiedzi) {
+      this.odkryty = odkryty;
       this.bomba = bomba;
       this.flaga = flaga;
       this.licznik = licznik;
       this.sasiedzi = sasiedzi;
     }
 
-function nowyKwadrat(nr,x,y) {
-    kwadrat[nr] = new Kwadrat([x,y],false,false,0,[]);
+function nowyKwadrat(nr) {
+    kwadrat[nr] = new Kwadrat(false,false,false,0,[]);
     sasiedzi(); 
     } 
 
@@ -35,6 +35,20 @@ function bomby () {
             }
   	  }
 	  }
+
+function flaga (id) {
+	 if (!kwadrat[id].odkryty) { 
+	 	     if(kwadrat[id].flaga) {
+				   	kwadrat[id].flaga = false;
+				   	document.getElementById(id).className = "zakryty";
+				   }
+				 else {
+				   kwadrat[id].flaga = true;
+				   document.getElementById(id).className = "flaga";
+				     }
+
+ }
+}
 
 function sasiedzi () {
    var sasiad = 0;
@@ -70,14 +84,22 @@ function licznik () {
    }
   }
 
-function klik(id) {
-      document.getElementById(id).className = "odsloniety";
+function odkryty (id) {
+
+    kwadrat[id].odkryty = true;
+
+    document.getElementById(id).className = "odsloniety";
+
+    // if któryś z sąsiadów ma licznik 0 to odsłoń go
+    // przejdź do sąsiada i sprawdź czy któryś z sąsiadów ma licznik 0
+
 
       if (kwadrat[id].licznik !== 0 && kwadrat[id].bomba !== true) {
       document.getElementById(id).innerHTML = kwadrat[id].licznik;
       }
       if (kwadrat[id].bomba === true) {
         document.getElementById(id).className += " bum";
+     
      //pokazuje wszystkie bomby po wybuchu
         for (i=0;i<pola;i++) {
           if (kwadrat[i].bomba === true) {
@@ -88,8 +110,13 @@ function klik(id) {
         document.getElementById(id).className += " odsloniety_granat";
         }
       }
+}
 
-      document.getElementById("test").innerHTML = "Numer: "+id+" Pozycja: "+kwadrat[id].pozycja+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik;
+function klik(id) {
+      odkryty(id);
+
+// test
+      document.getElementById("test").innerHTML = "Numer: "+id+" Flaga: "+kwadrat[id].flaga+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik+". Odkryty: "+kwadrat[id].odkryty;
     }
 
 function plansza() {
@@ -103,8 +130,14 @@ function plansza() {
       for (var x = 0; x < r; x++) {
 		      var cell = document.createElement("td");
             nr++;
-            nowyKwadrat(nr,x,y);
+            nowyKwadrat(nr);
             cell.id = nr;
+
+// nie działa w safari
+            cell.oncontextmenu = function() {
+            	flaga(this.id);
+            	return false;
+            };
 
             cell.onclick = function() {
             	klik(this.id);

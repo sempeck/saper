@@ -33,7 +33,9 @@ td {
  padding: 5px;
 }
 
-
+.zakryty {
+	background-color: #915161;
+}
 .odsloniety {
 	background-color: #C97A5B;
 }
@@ -45,4 +47,9 @@ td {
 .bum:before {
   content: "BUM!";
   font-size: 12px;
+}
+
+.flaga:before {
+	 content: "F";
+	/*background-color: #F1A468;*/
 }
