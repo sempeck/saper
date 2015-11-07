@@ -3,13 +3,13 @@ function saper () {
 	ileBomb = 10;
 	ileFlag = ileBomb;
 	pola = r*r; //ilość pól
+	// wygrana = pola;
 	nr = -1; // numer pola
 	kwadrat = []; // tablica z polami i ich wartościami
-	wybuch = false;
+	koniec = false;
 	pierwszy = true;
 	sekundy = 0;
 	t = 0;
-
 
   plansza();
   bomby(); 
@@ -18,9 +18,13 @@ function saper () {
 }
 
 function klik(id) {
+
+// test /////////////
+	document.getElementById("test").innerHTML = "Numer: "+id+"<br />"+"Flaga: "+kwadrat[id].flaga+"<br />"+"Bomba: "+kwadrat[id].bomba+"<br />"+"Sąsiedzi: "+kwadrat[id].sasiedzi+"<br />"+"Licznik: "+kwadrat[id].licznik+"<br />"+"Odkryty: "+kwadrat[id].odkryty;
+/////////////////////
+
       if (pierwszy) {
-    	// start zegara;
-    	sekundnik ();
+    	sekundnik (); // start zegara;
       	if (kwadrat[id].bomba) {
       		while (kwadrat[id].bomba) {
 	      		for (var i=0;i<pola;i++) {
@@ -33,13 +37,24 @@ function klik(id) {
     	}
     }
 	  pierwszy = false;
-	  if (!kwadrat[id].flaga && !wybuch){
+	  if (!kwadrat[id].odkryty && !kwadrat[id].flaga && !koniec){
       odkryty(id);
     }
+  }
 
-// test
-      document.getElementById("test").innerHTML = "Numer: "+id+"<br />"+"Flaga: "+kwadrat[id].flaga+"<br />"+"Bomba: "+kwadrat[id].bomba+"<br />"+"Sąsiedzi: "+kwadrat[id].sasiedzi+"<br />"+"Licznik: "+kwadrat[id].licznik+"<br />"+"Odkryty: "+kwadrat[id].odkryty;
-    }
+function sukces () {
+	   var wygrana = pola;
+	   for (var i=0;i<pola;i++) {
+	      if (kwadrat[i].odkryty) {
+	      	wygrana --;
+	      }
+	    }
+      if (wygrana === ileBomb) {
+      	zegar2.innerHTML = "MISTRZ!!!";
+      	koniec = true;
+      	clearTimeout(t);
+      }
+     }
 
 function Kwadrat(odkryty,bomba,flaga,licznik,sasiedzi) {
       this.odkryty = odkryty;
@@ -73,7 +88,7 @@ function bomby () {
 	  }
 
 function flaga (id) {
-	 if (!kwadrat[id].odkryty) { 
+	 if (!koniec && !kwadrat[id].odkryty) { 
 	 	     if(kwadrat[id].flaga) {
 				   	kwadrat[id].flaga = false;
 				   	document.getElementById(id).className = "zakryty";
@@ -86,6 +101,7 @@ function flaga (id) {
 				     }
     zegar1.innerHTML = ileFlag;
    }
+     
   }
 
 function sasiedzi () {
@@ -149,7 +165,7 @@ function odkryty (id) {
       }
       if (kwadrat[id].bomba) {
         document.getElementById(id).className += " bum";
-        wybuch = true;
+        koniec = true;
         // stop zegara
         clearTimeout(t);
      
@@ -167,6 +183,7 @@ function odkryty (id) {
         document.getElementById(id).className += " odkryty_granat";
         }
       }
+   sukces ();
 }
 
 function zegar () {
