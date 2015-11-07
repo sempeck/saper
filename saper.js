@@ -6,6 +6,7 @@ function saper () {
 	nr = -1; // numer pola
 	kwadrat = []; // tablica z polami i ich wartościami
 	wybuch = false;
+	pierwszy = true;
 
   plansza();
   bomby(); 
@@ -13,6 +14,30 @@ function saper () {
   zegar();
 
 }
+
+function klik(id) {
+      if (pierwszy) {
+    	// start zegara;
+      	if (kwadrat[id].bomba) {
+      		while (kwadrat[id].bomba) {
+	      		for (var i=0;i<pola;i++) {
+	      			kwadrat[i].bomba = false;
+	      			kwadrat[i].licznik = 0;
+	      		}	
+	      		bomby();
+	      		licznik();
+           }
+    	}
+    }
+	  pierwszy = false;
+	  if (!kwadrat[id].flaga && !wybuch){
+      odkryty(id);
+    }
+
+// test
+      document.getElementById("test").innerHTML = "Numer: "+id+" Flaga: "+kwadrat[id].flaga+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik+". Odkryty: "+kwadrat[id].odkryty;
+    }
+
     //matryca dla nowych kwadratów
 function Kwadrat(odkryty,bomba,flaga,licznik,sasiedzi) {
       this.odkryty = odkryty;
@@ -99,7 +124,7 @@ function odkryty (id) {
 
     kwadrat[id].odkryty = true;
 
-    document.getElementById(id).className = "odsloniety";
+    document.getElementById(id).className = "odkryty";
 
     // if któryś z sąsiadów ma licznik 0 to odsłoń go
     // przejdź do sąsiada i sprawdź czy któryś z sąsiadów ma licznik 0
@@ -111,30 +136,23 @@ function odkryty (id) {
       if (kwadrat[id].bomba) {
         document.getElementById(id).className += " bum";
         wybuch = true;
+        // stop zegara
      
      //pokazuje wszystkie bomby po wybuchu
         for (var i=0;i<pola;i++) {
           if (kwadrat[i].bomba && !kwadrat[i].flaga) {
         document.getElementById(i).className = "bum";
-        document.getElementById(i).className += " odsloniety";
+        document.getElementById(i).className += " odkryty";
           }
 
           if (kwadrat[i].flaga && !kwadrat[i].bomba) {
-        document.getElementById(i).className = "odsloniety flaga_zle";
+        document.getElementById(i).className = "odkryty flaga_zle";
           }
         //zmienia tło klikniętej bomby
-        document.getElementById(id).className += " odsloniety_granat";
+        document.getElementById(id).className += " odkryty_granat";
         }
       }
 }
-
-function klik(id) {
-	  if (!kwadrat[id].flaga && !wybuch){
-      odkryty(id);
-    }
-// test
-      document.getElementById("test").innerHTML = "Numer: "+id+" Flaga: "+kwadrat[id].flaga+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik+". Odkryty: "+kwadrat[id].odkryty;
-    }
 
 function zegar () {
 	  var zegar_div = document.getElementById("zegar");
@@ -160,7 +178,6 @@ function zegar () {
 
 	  zegar_div.appendChild(zegar);
 }
-
 
 function plansza() {
 	

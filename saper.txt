@@ -1,9 +1,12 @@
 To do:
-ODKRYWANIE
-ZEGAR
-  czasomierz, startuje od pierwszego kliknięcia
 
-JESZCZE
+ODKRYWANIE
+
+ZEGAR
+  czasomierz
+KONIEC
+  stop zegara i gratulacje
+KLIKANIE
 	pierwsze kliknięcie (nie ma bomby)
-    przekreślona bomba jeśli źle oflagowana
+	start zegara
 

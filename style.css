@@ -26,7 +26,7 @@ font-size: 16px;
 
 .zegar {
   margin: 0px;
-  height: 30px;
+  height: 40px;
   width: 354px;
   font-size: 22px;
   text-align: center;
@@ -46,7 +46,7 @@ font-size: 16px;
 
 table {
  border: 3px solid #48345C;
- margin: 0px;
+ /*margin: 0px;*/
 }
 
 td {
@@ -57,17 +57,17 @@ td {
  font-size: 22px;
  background-color: #915161;
  padding: 5px;
- border-style: outset;
+ /*border-style: outset;*/
 }
 
 .zakryty {
 	background-color: #915161;
 }
-.odsloniety {
+.odkryty {
 	background-color: #C97A5B;
 }
 
-.odsloniety_granat {
+.odkryty_granat {
 	background-color: #48345C;
 }
 
