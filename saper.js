@@ -2,7 +2,7 @@ var r = 8; //rozmiar planszy
 var ileBomb = 20;
 var pola = r*r; //ilość pól
 var nr = -1; // numer pola
-var kwadrat = []; // tablica z polami i ich warościami
+var kwadrat = []; // tablica z polami i ich wartościami
 
     //matryca dla nowych kwadratów
 function Kwadrat(pozycja,bomba,flaga,licznik,sasiedzi) {
@@ -36,7 +36,6 @@ function bomby () {
   	  }
 	  }
 
-
 function sasiedzi () {
    var sasiad = 0;
    var y = Math.floor(nr / r);
@@ -51,27 +50,30 @@ function sasiedzi () {
               xx = x+j;
     			   if (xx<r && xx>=0) {
 					sasiad = xx + (yy*r);
+					if (sasiad != nr) { // wyklucza samą siebie z listy
 					kwadrat[nr].sasiedzi.push(sasiad);
+				                     }
                       }
                }
        }
    }
 }
-    
 
 function licznik () {
-	// pobierz kwadrat[id].sasiedzi
-	// sprawdź czy bomba = true każdego sąsiada podstawiając w miejsce id
-	// za każdy hit dodaj 1 do licznika
-
-    kwadrat[5].licznik = 5;
-    kwadrat[1].licznik = 3; //testowo
-}
+  for (var i=0;i<pola;i++){
+  	for (var j=0;j<kwadrat[i].sasiedzi.length;j++) {
+         var z = kwadrat[i].sasiedzi[j];  		
+  		if (kwadrat[z].bomba === true) {
+  			kwadrat[i].licznik ++;
+  		}
+  	}
+   }
+  }
 
 function klik(id) {
       document.getElementById(id).className = "odsloniety";
 
-      if (kwadrat[id].licznik !== 0) {
+      if (kwadrat[id].licznik !== 0 && kwadrat[id].bomba !== true) {
       document.getElementById(id).innerHTML = kwadrat[id].licznik;
       }
       if (kwadrat[id].bomba === true) {
@@ -119,4 +121,3 @@ function plansza() {
   licznik();
 
   }
-
