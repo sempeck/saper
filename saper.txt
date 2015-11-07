@@ -4,8 +4,15 @@ SĄSIEDZI
 LICZNIK
 ODKRYWANIE
 FLAGOWANIE
+  right-button i long click
 META + ZEGAR
 	
 JESZCZE
 	pierwsze kliknięcie (nie ma bomby)
     przekreślona bomba jeśli źle oflagowana
+
+
+
+//           -(r+1) -(r) -(r-1) 
+//              -1   id     +1
+//           +(r-1)  +r  +(r+1)

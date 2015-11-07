@@ -1,8 +1,8 @@
 var r = 8; //rozmiar planszy
 var ileBomb = 20;
 var pola = r*r; //ilość pól
-var nr = -1;
-var kwadrat = [];
+var nr = -1; // numer pola
+var kwadrat = []; // tablica z polami i ich warościami
 
     //matryca dla nowych kwadratów
 function Kwadrat(pozycja,bomba,flaga,licznik,sasiedzi) {
@@ -15,7 +15,7 @@ function Kwadrat(pozycja,bomba,flaga,licznik,sasiedzi) {
 
 function nowyKwadrat(nr,x,y) {
     kwadrat[nr] = new Kwadrat([x,y],false,false,0,[]);
-// funkcja sasiedzi ... 
+    sasiedzi(); 
     } 
 
 function bomby () {
@@ -38,31 +38,26 @@ function bomby () {
 
 
 function sasiedzi () {
-	kwadrat[1].sasiedzi = [0,3];
-	kwadrat[0].sasiedzi = [0,3];
-     
-// pobierz id
-// rozłóż na x,y
-// wykonaj działania na x,y
-// odrzuć x>7 i y>7 (czyli r-1)
-// z powrotem do id
-// umieść w tablicy kwadrat.sasiedzi
+   var sasiad = 0;
+   var y = Math.floor(nr / r);
+   var x = nr - (y * r); 
 
-         
-//              y-1
-//              y    x-1, x, x+1
-//              y+1 
-      
-
-//           -(r+1) -(r) -(r-1) 
-//              -1   id     +1
-//           +(r-1)  +r  +(r+1)
-
-//    x + (y*r) = id
-//    id div r = y
-//    id - (y * r) = x
-    
+   for(var i=-1;i<2;i++){
+       var yy = 0;
+        yy = y+i;
+        if (yy<r && yy>=0) {
+          for(var j=-1;j<2;j++){
+             var xx = 0;
+              xx = x+j;
+    			   if (xx<r && xx>=0) {
+					sasiad = xx + (yy*r);
+					kwadrat[nr].sasiedzi.push(sasiad);
+                      }
+               }
+       }
+   }
 }
+    
 
 function licznik () {
 	// pobierz kwadrat[id].sasiedzi
