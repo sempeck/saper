@@ -7,17 +7,20 @@ function saper () {
 	kwadrat = []; // tablica z polami i ich wartościami
 	wybuch = false;
 	pierwszy = true;
+	sekundy = 0;
+	t = 0;
+
 
   plansza();
   bomby(); 
   licznik();
   zegar();
-
 }
 
 function klik(id) {
       if (pierwszy) {
     	// start zegara;
+    	sekundnik ();
       	if (kwadrat[id].bomba) {
       		while (kwadrat[id].bomba) {
 	      		for (var i=0;i<pola;i++) {
@@ -35,10 +38,9 @@ function klik(id) {
     }
 
 // test
-      document.getElementById("test").innerHTML = "Numer: "+id+" Flaga: "+kwadrat[id].flaga+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik+". Odkryty: "+kwadrat[id].odkryty;
+      document.getElementById("test").innerHTML = "Numer: "+id+"<br />"+"Flaga: "+kwadrat[id].flaga+"<br />"+"Bomba: "+kwadrat[id].bomba+"<br />"+"Sąsiedzi: "+kwadrat[id].sasiedzi+"<br />"+"Licznik: "+kwadrat[id].licznik+"<br />"+"Odkryty: "+kwadrat[id].odkryty;
     }
 
-    //matryca dla nowych kwadratów
 function Kwadrat(odkryty,bomba,flaga,licznik,sasiedzi) {
       this.odkryty = odkryty;
       this.bomba = bomba;
@@ -120,16 +122,28 @@ function licznik () {
    }
   }
 
+function czyszczenie (id) {
+  //////////////// odsłanianie //////////////////////////////
+
+  	// for (var i=0;i<kwadrat[id].sasiedzi.length;i++) {
+   //         var z = kwadrat[id].sasiedzi[i];
+   //         odkryty(z);
+   //        }
+          
+        }
+
+///////////////////////////////////////////////////////////
+
 function odkryty (id) {
 
     kwadrat[id].odkryty = true;
 
     document.getElementById(id).className = "odkryty";
 
-    // if któryś z sąsiadów ma licznik 0 to odsłoń go
-    // przejdź do sąsiada i sprawdź czy któryś z sąsiadów ma licznik 0
-
-
+    if (kwadrat[id].licznik === 0 && !kwadrat[id].bomba) {
+	    // czyszczenie(id);
+      }
+  
       if (kwadrat[id].licznik !== 0 && kwadrat[id].bomba !== true) {
       document.getElementById(id).innerHTML = kwadrat[id].licznik;
       }
@@ -137,6 +151,7 @@ function odkryty (id) {
         document.getElementById(id).className += " bum";
         wybuch = true;
         // stop zegara
+        clearTimeout(t);
      
      //pokazuje wszystkie bomby po wybuchu
         for (var i=0;i<pola;i++) {
@@ -173,10 +188,20 @@ function zegar () {
 	      
 	      zegar3 = document.createElement("div");
 				zegar3.className = "zegar3";
-				zegar3.innerHTML = "000";  
+				zegar3.innerHTML = "0";  
 	   		zegar.appendChild(zegar3);
 
 	  zegar_div.appendChild(zegar);
+}
+
+function sekundnik () {
+				    t = setTimeout(add, 1000);
+			
+				function add() {
+				    sekundy++; 
+				    zegar3.innerHTML = sekundy;
+				    sekundnik();
+				}
 }
 
 function plansza() {
