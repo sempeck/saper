@@ -1,8 +1,8 @@
 To do:
 ODKRYWANIE
-META
 ZEGAR
-	
+  czasomierz, startuje od pierwszego kliknięcia
+
 JESZCZE
 	pierwsze kliknięcie (nie ma bomby)
     przekreślona bomba jeśli źle oflagowana

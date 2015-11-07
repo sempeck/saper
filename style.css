@@ -15,30 +15,33 @@ font-size: 16px;
 }
 
 #saper {
-	/*background-color: #fff;*/
 	margin: 40px;
 }
 
 #plansza {
-/*   width: 200px;
-   background-color: #F8C278;
-   border: 5px solid #48345C;*/
 }
 
 .komentarz {
-	/*margin: 40px;*/
  }
 
 .zegar {
-	/*border: 5px solid #48345C;*/
-	/*border-style: inset;*/
   margin: 0px;
   height: 30px;
   width: 354px;
-  /*background-color: #48345C;*/
-  /*padding-top: 10px;*/
   font-size: 22px;
+  text-align: center;
+}
 
+.zegar1 {
+	float: left;
+}
+
+.zegar2 {
+	display: inline;
+}
+
+.zegar3 {
+	float: right;
 }
 
 table {
@@ -75,5 +78,8 @@ td {
 
 .flaga:before {
 	 content: "F";
-	/*background-color: #F1A468;*/
+}
+
+.flaga_zle:before {
+	content: "X";
 }

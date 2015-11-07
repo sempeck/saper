@@ -5,8 +5,11 @@ function saper () {
 	pola = r*r; //ilość pól
 	nr = -1; // numer pola
 	kwadrat = []; // tablica z polami i ich wartościami
+	wybuch = false;
 
   plansza();
+  bomby(); 
+  licznik();
   zegar();
 
 }
@@ -54,7 +57,7 @@ function flaga (id) {
 				   document.getElementById(id).className = "flaga";
             ileFlag --;
 				     }
-    zegar.innerHTML = ileFlag;
+    zegar1.innerHTML = ileFlag;
    }
   }
 
@@ -107,12 +110,17 @@ function odkryty (id) {
       }
       if (kwadrat[id].bomba) {
         document.getElementById(id).className += " bum";
+        wybuch = true;
      
      //pokazuje wszystkie bomby po wybuchu
         for (var i=0;i<pola;i++) {
           if (kwadrat[i].bomba && !kwadrat[i].flaga) {
         document.getElementById(i).className = "bum";
         document.getElementById(i).className += " odsloniety";
+          }
+
+          if (kwadrat[i].flaga && !kwadrat[i].bomba) {
+        document.getElementById(i).className = "odsloniety flaga_zle";
           }
         //zmienia tło klikniętej bomby
         document.getElementById(id).className += " odsloniety_granat";
@@ -121,28 +129,42 @@ function odkryty (id) {
 }
 
 function klik(id) {
+	  if (!kwadrat[id].flaga && !wybuch){
       odkryty(id);
-
+    }
 // test
       document.getElementById("test").innerHTML = "Numer: "+id+" Flaga: "+kwadrat[id].flaga+". Bomba: "+kwadrat[id].bomba+". Sąsiedzi: "+kwadrat[id].sasiedzi+". Licznik: "+kwadrat[id].licznik+". Odkryty: "+kwadrat[id].odkryty;
     }
 
-function ileFlag (ileFlag) {
-  zegar.innerHTML = ileFlag;
-}
-
 function zegar () {
-  var zegar_div = document.getElementById("zegar");
-   zegar = document.createElement("div");
-    zegar.className = "zegar";
-    zegar.innerHTML = ileFlag;
-  zegar_div.appendChild(zegar);
+	  var zegar_div = document.getElementById("zegar");
+
+  	  zegar = document.createElement("div");
+        zegar.className = "zegar";	    
+
+		    zegar1 = document.createElement("div");
+		    zegar1.className = "zegar1";
+		    zegar1.innerHTML = ileFlag;
+		    zegar.appendChild(zegar1);
+
+				zegar2 = document.createElement("div");
+				zegar2.className = "zegar2";
+				zegar2.innerHTML = "SAPER";
+				zegar2.onclick = function () {location.reload();}
+		    zegar.appendChild(zegar2);
+	      
+	      zegar3 = document.createElement("div");
+				zegar3.className = "zegar3";
+				zegar3.innerHTML = "000";  
+	   		zegar.appendChild(zegar3);
+
+	  zegar_div.appendChild(zegar);
 }
 
 
 function plansza() {
 	
-  var plansza    = document.getElementById("plansza");
+  var plansza = document.getElementById("plansza");
   var tbl     = document.createElement("table");
   var tblBody = document.createElement("tbody");
 
@@ -172,8 +194,5 @@ function plansza() {
     }
      tbl.appendChild(tblBody);
    plansza.appendChild(tbl);
-
-  bomby(); 
-  licznik();
 
   }
