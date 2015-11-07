@@ -1,6 +1,7 @@
 To do:
 ODKRYWANIE
-META + ZEGAR
+META
+ZEGAR
 	
 JESZCZE
 	pierwsze kliknięcie (nie ma bomby)

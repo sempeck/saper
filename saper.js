@@ -1,10 +1,15 @@
-var r = 8; //rozmiar planszy
-var ileBomb = 10;
-var ileFlag = ileBomb;
-var pola = r*r; //ilość pól
-var nr = -1; // numer pola
-var kwadrat = []; // tablica z polami i ich wartościami
+function saper () {
+	r = 8; //rozmiar planszy
+	ileBomb = 10;
+	ileFlag = ileBomb;
+	pola = r*r; //ilość pól
+	nr = -1; // numer pola
+	kwadrat = []; // tablica z polami i ich wartościami
 
+  plansza();
+  zegar();
+
+}
     //matryca dla nowych kwadratów
 function Kwadrat(odkryty,bomba,flaga,licznik,sasiedzi) {
       this.odkryty = odkryty;
