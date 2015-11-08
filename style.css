@@ -34,6 +34,8 @@ h1 {
 
 .zegar1 {
 	float: left;
+	width: 40px;
+	text-align: left;
 }
 
 .zegar2 {
@@ -42,6 +44,8 @@ h1 {
 
 .zegar3 {
 	float: right;
+	width: 40px;
+	text-align: right;
 }
 
 table {

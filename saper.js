@@ -18,11 +18,7 @@ function saper () {
 }
 
 function klik(id) {
-
-// test /////////////
-	document.getElementById("test").innerHTML = "Numer: "+id+"<br />"+"Flaga: "+kwadrat[id].flaga+"<br />"+"Bomba: "+kwadrat[id].bomba+"<br />"+"Sąsiedzi: "+kwadrat[id].sasiedzi+"<br />"+"Licznik: "+kwadrat[id].licznik+"<br />"+"Odkryty: "+kwadrat[id].odkryty;
-/////////////////////
-
+	do_sprawdzenia_sasiadow = []; 
       if (pierwszy) {
     	sekundnik (); // start zegara;
       	if (kwadrat[id].bomba) {
@@ -40,6 +36,9 @@ function klik(id) {
 	  if (!kwadrat[id].odkryty && !kwadrat[id].flaga && !koniec){
       odkryty(id);
     }
+//////// metadane /////////////
+	document.getElementById("test").innerHTML = "Numer: "+id+"<br />"+"Flaga: "+kwadrat[id].flaga+"<br />"+"Bomba: "+kwadrat[id].bomba+"<br />"+"Sąsiedzi: "+kwadrat[id].sasiedzi+"<br />"+"Licznik: "+kwadrat[id].licznik+"<br />"+"Odkryty: "+kwadrat[id].odkryty+"<br />"+"do_odkrycia "+do_odkrycia+"<br />"+"do_sprawdzenia_sasiadow "+do_sprawdzenia_sasiadow+"<br />"+"sprawdzony: "+kwadrat[id].sprawdzony;
+///////////////////////////////
   }
 
 function sukces () {
@@ -56,16 +55,19 @@ function sukces () {
       }
      }
 
-function Kwadrat(odkryty,bomba,flaga,licznik,sasiedzi) {
+function Kwadrat(odkryty,bomba,flaga,licznik,sasiedzi,sprawdzony,naLiscieDoSprawdzenia,naLiscieDoOdkrycia) {
       this.odkryty = odkryty;
       this.bomba = bomba;
       this.flaga = flaga;
       this.licznik = licznik;
       this.sasiedzi = sasiedzi;
+      this.sprawdzony = sprawdzony;
+      this.naLiscieDoSprawdzenia = naLiscieDoSprawdzenia;
+      this.naLiscieDoOdkrycia = naLiscieDoOdkrycia;
     }
 
 function nowyKwadrat(nr) {
-    kwadrat[nr] = new Kwadrat(false,false,false,0,[]);
+    kwadrat[nr] = new Kwadrat(false,false,false,0,[],false,false,false);
     sasiedzi(); 
     } 
 
@@ -88,6 +90,7 @@ function bomby () {
 	  }
 
 function flaga (id) {
+	// nie działa dobrze w safari
 	 if (!koniec && !kwadrat[id].odkryty) { 
 	 	     if(kwadrat[id].flaga) {
 				   	kwadrat[id].flaga = false;
@@ -118,9 +121,9 @@ function sasiedzi () {
               xx = x+j;
     			   if (xx<r && xx>=0) {
 					sasiad = xx + (yy*r);
-					if (sasiad != nr) { // wyklucza samą siebie z listy
+					//if (sasiad != nr) { // wyklucza samą siebie z listy
 					kwadrat[nr].sasiedzi.push(sasiad);
-				                     }
+				    //                 }
                       }
                }
        }
@@ -138,51 +141,85 @@ function licznik () {
    }
   }
 
-function czyszczenie (id) {
-  //////////////// odsłanianie //////////////////////////////
+do_odkrycia = [];
+do_sprawdzenia_sasiadow = [];  
+dalej = false;
+//////////////// odsłanianie //////////////////////////////
+  
+  function listyDoCzyszczenia (id) {
+  	kwadrat[id].sprawdzony = true;
 
-  	// for (var i=0;i<kwadrat[id].sasiedzi.length;i++) {
-   //         var z = kwadrat[id].sasiedzi[i];
-   //         odkryty(z);
-   //        }
-          
+  	for (var i=0;i<kwadrat[id].sasiedzi.length;i++) {
+           var z = kwadrat[id].sasiedzi[i];
+           if (!kwadrat[z].naLiscieDoOdkrycia) {
+           do_odkrycia.push(z);
+           kwadrat[z].naLiscieDoOdkrycia = true;
+           
+             if (kwadrat[z].licznik === 0 && z != id && !kwadrat[z].naLiscieDoSprawdzenia && !kwadrat[z].sprawdzony) {
+
+             	do_sprawdzenia_sasiadow.push(z);
+             	kwadrat[z].naLiscieDoSprawdzenia = true;
+             }
+           }
+          }
+          sprawdzanieSasiadow();  
         }
+
+	  function sprawdzanieSasiadow () {
+	    for (var i=0;i<do_sprawdzenia_sasiadow.length;i++) {
+	   	var spr1 = do_sprawdzenia_sasiadow[i];
+        if (!kwadrat[spr1].sprawdzony){
+	   	  listyDoCzyszczenia(spr1);
+	   	     }
+         }   
+	     
+	     doOdkrycia();
+	  
+	   }
+
+    function doOdkrycia () {
+	    for (var i=0;i<do_odkrycia.length;i++) {
+	      var spr = do_odkrycia[i];
+	      kwadrat[spr].sprawdzony = true;
+	    	odkryty(spr);
+	    }
+		    do_odkrycia = [];
+	    }
 
 ///////////////////////////////////////////////////////////
 
 function odkryty (id) {
 
-    kwadrat[id].odkryty = true;
+  if (kwadrat[id].licznik === 0 && !kwadrat[id].bomba && !kwadrat[id].odkryty && !kwadrat[id].sprawdzony) {
+      listyDoCzyszczenia(id);
+    }
 
+    kwadrat[id].odkryty = true;
     document.getElementById(id).className = "odkryty";
 
-    if (kwadrat[id].licznik === 0 && !kwadrat[id].bomba) {
-	    // czyszczenie(id);
-      }
-  
-      if (kwadrat[id].licznik !== 0 && kwadrat[id].bomba !== true) {
-      document.getElementById(id).innerHTML = kwadrat[id].licznik;
-      }
-      if (kwadrat[id].bomba) {
-        document.getElementById(id).className += " bum";
-        koniec = true;
-        // stop zegara
-        clearTimeout(t);
-     
-     //pokazuje wszystkie bomby po wybuchu
-        for (var i=0;i<pola;i++) {
-          if (kwadrat[i].bomba && !kwadrat[i].flaga) {
-        document.getElementById(i).className = "bum";
-        document.getElementById(i).className += " odkryty";
-          }
-
-          if (kwadrat[i].flaga && !kwadrat[i].bomba) {
-        document.getElementById(i).className = "odkryty flaga_zle";
-          }
-        //zmienia tło klikniętej bomby
-        document.getElementById(id).className += " odkryty_granat";
+    if (kwadrat[id].licznik !== 0 && kwadrat[id].bomba !== true) {
+    document.getElementById(id).innerHTML = kwadrat[id].licznik;
+    }
+    if (kwadrat[id].bomba) {
+      document.getElementById(id).className += " bum";
+      koniec = true;
+      // stop zegara
+      clearTimeout(t);
+   
+   //pokazuje wszystkie bomby po wybuchu
+      for (var i=0;i<pola;i++) {
+        if (kwadrat[i].bomba && !kwadrat[i].flaga) {
+      document.getElementById(i).className = "bum";
+      document.getElementById(i).className += " odkryty";
         }
+
+        if (kwadrat[i].flaga && !kwadrat[i].bomba) {
+      document.getElementById(i).className = "odkryty flaga_zle";
+        }
+      //zmienia tło klikniętej bomby
+      document.getElementById(id).className += " odkryty_granat";
       }
+    }
    sukces ();
 }
 
@@ -237,7 +274,6 @@ function plansza() {
             nowyKwadrat(nr);
             cell.id = nr;
 
-// nie działa w safari
             cell.oncontextmenu = function() {
             	flaga(this.id);
             	return false;
