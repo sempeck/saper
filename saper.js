@@ -1,15 +1,17 @@
 function saper () {
-	r = 8; //rozmiar planszy
-	ileBomb = 10;
-	ileFlag = ileBomb;
-	pola = r*r; //ilość pól
-	// wygrana = pola;
-	nr = -1; // numer pola
-	kwadrat = []; // tablica z polami i ich wartościami
-	koniec = false;
-	pierwszy = true;
-	sekundy = 0;
-	t = 0;
+       r = 8; //rozmiar planszy
+ ileBomb = 10;
+ ileFlag = ileBomb;
+    pola = r*r; //ilość pól
+// wygrana = pola;
+      nr = -1; // numer pola
+ kwadrat = []; // tablica z polami i ich wartościami
+  koniec = false;
+pierwszy = true;
+ sekundy = 0;
+       t = 0;
+do_odkrycia = [];
+do_sprawdzenia_sasiadow = [];  
 
   plansza();
   bomby(); 
@@ -49,7 +51,7 @@ function sukces () {
 	      }
 	    }
       if (wygrana === ileBomb) {
-      	zegar2.innerHTML = "MISTRZ!!!";
+      	zegar2.innerHTML = "MISTRZ!";
       	koniec = true;
       	clearTimeout(t);
       }
@@ -141,9 +143,8 @@ function licznik () {
    }
   }
 
-do_odkrycia = [];
-do_sprawdzenia_sasiadow = [];  
-dalej = false;
+
+
 //////////////// odsłanianie //////////////////////////////
   
   function listyDoCzyszczenia (id) {
@@ -203,6 +204,10 @@ function odkryty (id) {
     if (kwadrat[id].bomba) {
       document.getElementById(id).className += " bum";
       koniec = true;
+      zegar2.innerHTML = "BUM!";
+				    $(document).ready(function() {
+						$(".zegar2").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+				    });
       // stop zegara
       clearTimeout(t);
    
@@ -218,6 +223,7 @@ function odkryty (id) {
         }
       //zmienia tło klikniętej bomby
       document.getElementById(id).className += " odkryty_granat";
+
       }
     }
    sukces ();
